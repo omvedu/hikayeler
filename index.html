@@ -2,21 +2,27 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masal Evim | Çocuk Hikayeleri</title>
     <link rel="stylesheet" href="assets/style.css">
-    <title>Çocuk Hikayeleri</title>
 </head>
 <body>
+
+    <header>
+        <div class="logo">✨ Masal Evim</div>
+        <p>Uyku öncesi en tatlı maceralar</p>
+    </header>
+
     <div class="container">
-        <h1>📚 Çocuk Hikayeleri</h1>
-        <input type="text" id="aramaKutusu" onkeyup="ara()" placeholder="Hikaye ara...">
+        <input type="text" id="aramaKutusu" onkeyup="ara()" placeholder="🔍 Bir masal arayın...">
         
         <div class="hikaye-listesi" id="hikayeListesi">
-            <div class="kart">
-                <img src="assets/images/cesurtavsan1.jpg" alt="Hikaye 1">
-                <h3><a href="hikayeler/ilk-hikaye.html">Cesur Tavşan</a></h3>
-            </div>
+            <!-- Hikayeler buraya app.js ile gelecek -->
         </div>
+        
+        <div id="yukleniyor" style="text-align: center; padding: 20px;">Daha fazla masal yükleniyor...</div>
     </div>
+
     <script src="assets/app.js"></script>
 </body>
 </html>
