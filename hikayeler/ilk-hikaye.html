@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leo Kitap</title>
+<title>Minik Aslan Leo</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: #fff8f0;
 }
 
 .container {
     max-width: 600px;
     margin: auto;
-    overflow: hidden;
-    position: relative;
+    padding: 16px;
 }
 
 h1 {
@@ -24,21 +23,18 @@ h1 {
     color: #ff8c42;
 }
 
-/* PAGES */
+/* PAGE */
 .page {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 100%;
-    transition: all 0.4s ease;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease;
 }
 
-.page.active {
-    left: 0;
-}
-
-.page.prev {
-    left: -100%;
+/* görünür olunca */
+.page.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .page img {
@@ -48,39 +44,20 @@ h1 {
 
 .text {
     background: white;
-    padding: 12px;
+    padding: 16px;
     border-radius: 12px;
     margin-top: 10px;
-}
-
-/* BUTTONS */
-.nav {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-button {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    background: #ff8c42;
-    color: white;
+    line-height: 1.5;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Minik Aslan Leo 🦁</h1>
+<div class="container">
+    <h1>Minik Aslan Leo 🦁</h1>
 
-<div class="container" id="book">
-
-    <!-- SAYFALAR -->
-    <div class="page active">
+    <div class="page">
         <img src="/assets/images/lion.jpg">
         <div class="text">
             Leo küçük, sevimli bir aslandı. Ama onun büyük bir korkusu vardı: doktora gitmek! Ne zaman annesi “kontrole gideceğiz” dese, Leo’nun kalbi hızlı hızlı atardı.
@@ -134,56 +111,27 @@ button {
     <div class="page">
         <div class="text">
             O günden sonra Leo, korktuğu şeylerle yüzleşmenin onu daha güçlü yaptığını öğrendi.
-            💛 Korkularımız bazen düşündüğümüz kadar büyük değildir.
+            💛 Korkularımız bazen düşündüğümüz kadar büyük değildir. Onlarla yüzleştiğimizde içimizdeki cesareti keşfederiz.
         </div>
     </div>
 
 </div>
 
-<div class="nav">
-    <button onclick="prev()">⬅️</button>
-    <button onclick="next()">➡️</button>
-</div>
-
 <script>
-const pages = document.querySelectorAll(".page");
-let index = 0;
+const pages = document.querySelectorAll('.page');
 
-function update() {
-    pages.forEach((p, i) => {
-        p.classList.remove("active", "prev");
-
-        if (i === index) p.classList.add("active");
-        else if (i < index) p.classList.add("prev");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
     });
-}
-
-function next() {
-    if (index < pages.length - 1) {
-        index++;
-        update();
-    }
-}
-
-function prev() {
-    if (index > 0) {
-        index--;
-        update();
-    }
-}
-
-/* SWIPE */
-let startX = 0;
-
-document.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
+}, {
+    threshold: 0.2
 });
 
-document.addEventListener("touchend", e => {
-    let diff = startX - e.changedTouches[0].clientX;
-
-    if (diff > 50) next();
-    if (diff < -50) prev();
+pages.forEach(page => {
+    observer.observe(page);
 });
 </script>
 
