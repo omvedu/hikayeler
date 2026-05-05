@@ -1,128 +1,177 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minik Aslan Leo ve Cesaret Yolculuğu</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #fff8f0;
-            color: #333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minik Aslan Leo</title>
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 16px;
-        }
+<style>
+body {
+    margin: 0;
+    background: #f5efe6;
+    font-family: Arial;
+    text-align: center;
+}
 
-        h1 {
-            text-align: center;
-            color: #ff8c42;
-        }
+h1 {
+    color: #ff8c42;
+}
 
-        .page {
-            margin-bottom: 32px;
-            background: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
+/* BOOK */
+.book {
+    width: 320px;
+    height: 520px;
+    margin: 20px auto;
+    perspective: 1500px;
+    position: relative;
+}
 
-        .page img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: white;
+    border-radius: 10px;
+    transform-origin: left;
+    transition: transform 0.8s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
 
-        .text {
-            padding: 16px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
+.page img {
+    width: 100%;
+}
 
-        .message {
-            background: #fff3cd;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 20px;
-        }
+.text {
+    padding: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+}
 
-        @media (max-width: 480px) {
-            .text {
-                font-size: 15px;
-            }
-        }
-    </style>
+/* FLIP */
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+/* BUTTONS */
+.controls {
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background: #ff8c42;
+    color: white;
+    cursor: pointer;
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Minik Aslan Leo ve Cesaret Yolculuğu</h1>
+<h1>Minik Aslan Leo 🦁</h1>
+
+<div class="book" id="book">
 
     <div class="page">
-        <img src="/assets/images/lion.jpg" alt="Leo korkmuş">
+        <img src="/assets/images/lion.jpg">
         <div class="text">
             Leo küçük, sevimli bir aslandı. Ama onun büyük bir korkusu vardı: doktora gitmek! Ne zaman annesi “kontrole gideceğiz” dese, Leo’nun kalbi hızlı hızlı atardı.
         </div>
     </div>
 
     <div class="page">
-        <img src="/assets/images/lion2.png" alt="Leo saklanıyor">
+        <img src="/assets/images/lion2.png">
         <div class="text">
             “Ya canım acırsa?” diye düşünürdü Leo. O yüzden her seferinde saklanacak bir yer arardı.
         </div>
     </div>
 
     <div class="page">
-        <img src="/assets/images/lion3.png" alt="Anne aslan konuşuyor">
+        <img src="/assets/images/lion3.png">
         <div class="text">
-            Bir gün annesi onun yanına oturdu ve dedi ki: “Leo, doktorlar bizi sağlıklı tutmak için var. Onlar aslında bizim dostumuz.”
+            Bir gün annesi onun yanına oturdu ve dedi ki:
+            “Leo, doktorlar bizi sağlıklı tutmak için var. Onlar aslında bizim dostumuz.”
         </div>
     </div>
 
     <div class="page">
-        <img src="/assets/images/lion4.png" alt="Leo düşünüyor">
+        <img src="/assets/images/lion4.png">
         <div class="text">
             Leo biraz düşündü. “Belki de denemeliyim,” dedi ama hâlâ biraz korkuyordu.
         </div>
     </div>
 
     <div class="page">
-        <img src="/assets/images/lion5.png" alt="Doktora gidiş">
+        <img src="/assets/images/lion5.png">
         <div class="text">
             Doktora gittiklerinde Leo’nun kalbi yine hızlı attı. Ama bu sefer kaçmadı. Annesinin patisini tuttu.
         </div>
     </div>
 
     <div class="page">
-        <img src="/assets/images/lion6.png" alt="Doktor muayene ediyor">
+        <img src="/assets/images/lion6.png">
         <div class="text">
             Doktor çok nazikti. Leo’yu dinledi, ona gülümsedi ve hiçbir şeyin korktuğu kadar kötü olmadığını gösterdi.
         </div>
     </div>
 
     <div class="page">
-        <img src="/assets/images/lion7.png" alt="Leo mutlu">
+        <img src="/assets/images/lion7.png">
         <div class="text">
-            Kontrol bitince Leo çok şaşırdı. “Hiç de korktuğum gibi değildi!” dedi gururla.
+            Kontrol bitince Leo çok şaşırdı.
+            “Hiç de korktuğum gibi değildi!” dedi gururla.
         </div>
     </div>
 
     <div class="page">
         <div class="text">
             O günden sonra Leo, korktuğu şeylerle yüzleşmenin onu daha güçlü yaptığını öğrendi.
+            💛 Korkularımız bazen düşündüğümüz kadar büyük değildir. Onlarla yüzleştiğimizde içimizdeki cesareti keşfederiz.
         </div>
     </div>
 
-    <div class="message">
-        💛 Korkularımız bazen düşündüğümüz kadar büyük değildir. Onlarla yüzleştiğimizde içimizdeki cesareti keşfederiz.
-    </div>
 </div>
+
+<div class="controls">
+    <button onclick="prevPage()">⬅️ Geri</button>
+    <button onclick="nextPage()">İleri ➡️</button>
+    <button onclick="speak()">🔊 Oku</button>
+</div>
+
+<script>
+const pages = document.querySelectorAll(".page");
+let current = 0;
+
+function nextPage() {
+    if (current < pages.length) {
+        pages[current].classList.add("flipped");
+        current++;
+    }
+}
+
+function prevPage() {
+    if (current > 0) {
+        current--;
+        pages[current].classList.remove("flipped");
+    }
+}
+
+/* SES OKUMA (SADECE TEXT) */
+function speak() {
+    const textEl = pages[current]?.querySelector(".text");
+    if (!textEl) return;
+
+    let utterance = new SpeechSynthesisUtterance(textEl.innerText);
+    utterance.lang = "tr-TR";
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utterance);
+}
+</script>
 
 </body>
 </html>
