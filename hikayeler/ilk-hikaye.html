@@ -3,69 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minik Aslan Leo</title>
+<title>Leo Kitap</title>
 
 <style>
 body {
     margin: 0;
-    background: #f5efe6;
     font-family: Arial;
-    text-align: center;
+    background: #fff8f0;
 }
 
-h1 {
-    color: #ff8c42;
-}
-
-/* BOOK */
-.book {
-    width: 320px;
-    height: 520px;
-    margin: 20px auto;
-    perspective: 1500px;
+.container {
+    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
     position: relative;
 }
 
+h1 {
+    text-align: center;
+    color: #ff8c42;
+}
+
+/* PAGES */
 .page {
-    width: 100%;
-    height: 100%;
     position: absolute;
-    background: white;
-    border-radius: 10px;
-    transform-origin: left;
-    transition: transform 0.8s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    overflow: hidden;
+    width: 100%;
+    top: 0;
+    left: 100%;
+    transition: all 0.4s ease;
+}
+
+.page.active {
+    left: 0;
+}
+
+.page.prev {
+    left: -100%;
 }
 
 .page img {
     width: 100%;
+    border-radius: 16px;
 }
 
 .text {
+    background: white;
     padding: 12px;
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-/* FLIP */
-.page.flipped {
-    transform: rotateY(-180deg);
-}
-
-/* BUTTONS */
-.controls {
+    border-radius: 12px;
     margin-top: 10px;
 }
 
+/* BUTTONS */
+.nav {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
 button {
-    padding: 10px;
-    margin: 5px;
+    padding: 10px 16px;
     border: none;
     border-radius: 8px;
     background: #ff8c42;
     color: white;
-    cursor: pointer;
 }
 </style>
 </head>
@@ -74,9 +77,10 @@ button {
 
 <h1>Minik Aslan Leo 🦁</h1>
 
-<div class="book" id="book">
+<div class="container" id="book">
 
-    <div class="page">
+    <!-- SAYFALAR -->
+    <div class="page active">
         <img src="/assets/images/lion.jpg">
         <div class="text">
             Leo küçük, sevimli bir aslandı. Ama onun büyük bir korkusu vardı: doktora gitmek! Ne zaman annesi “kontrole gideceğiz” dese, Leo’nun kalbi hızlı hızlı atardı.
@@ -130,47 +134,57 @@ button {
     <div class="page">
         <div class="text">
             O günden sonra Leo, korktuğu şeylerle yüzleşmenin onu daha güçlü yaptığını öğrendi.
-            💛 Korkularımız bazen düşündüğümüz kadar büyük değildir. Onlarla yüzleştiğimizde içimizdeki cesareti keşfederiz.
+            💛 Korkularımız bazen düşündüğümüz kadar büyük değildir.
         </div>
     </div>
 
 </div>
 
-<div class="controls">
-    <button onclick="prevPage()">⬅️ Geri</button>
-    <button onclick="nextPage()">İleri ➡️</button>
-    <button onclick="speak()">🔊 Oku</button>
+<div class="nav">
+    <button onclick="prev()">⬅️</button>
+    <button onclick="next()">➡️</button>
 </div>
 
 <script>
 const pages = document.querySelectorAll(".page");
-let current = 0;
+let index = 0;
 
-function nextPage() {
-    if (current < pages.length) {
-        pages[current].classList.add("flipped");
-        current++;
+function update() {
+    pages.forEach((p, i) => {
+        p.classList.remove("active", "prev");
+
+        if (i === index) p.classList.add("active");
+        else if (i < index) p.classList.add("prev");
+    });
+}
+
+function next() {
+    if (index < pages.length - 1) {
+        index++;
+        update();
     }
 }
 
-function prevPage() {
-    if (current > 0) {
-        current--;
-        pages[current].classList.remove("flipped");
+function prev() {
+    if (index > 0) {
+        index--;
+        update();
     }
 }
 
-/* SES OKUMA (SADECE TEXT) */
-function speak() {
-    const textEl = pages[current]?.querySelector(".text");
-    if (!textEl) return;
+/* SWIPE */
+let startX = 0;
 
-    let utterance = new SpeechSynthesisUtterance(textEl.innerText);
-    utterance.lang = "tr-TR";
+document.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
 
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utterance);
-}
+document.addEventListener("touchend", e => {
+    let diff = startX - e.changedTouches[0].clientX;
+
+    if (diff > 50) next();
+    if (diff < -50) prev();
+});
 </script>
 
 </body>
